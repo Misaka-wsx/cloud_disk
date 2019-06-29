@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Header Files\selfwidget">
+      <UniqueIdentifier>{e49b41b2-9af6-41c4-8936-3fe2c08e735b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\common">
+      <UniqueIdentifier>{7697aad3-daed-47f1-829a-16b22724e6c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Form Files\selfwidegt">
+      <UniqueIdentifier>{cc2ce0ca-e052-40bd-9d07-9a440aa1e7c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{165d1878-54cb-4b97-b482-9bace5c9373a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\selfwidget">
+      <UniqueIdentifier>{61e6b63e-5c6c-4bb8-a425-1028298c0d71}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cloud_disk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\des.c">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\downloadlayout.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\downloadtask.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\logininfoinstance.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\uploadlayout.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\uploadtask.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="selfwidget\dataprogress.cpp">
+      <Filter>Source Files\selfwidget</Filter>
+    </ClCompile>
+    <ClCompile Include="selfwidget\filepropertyinfo.cpp">
+      <Filter>Source Files\selfwidget</Filter>
+    </ClCompile>
+    <ClCompile Include="selfwidget\mymenu.cpp">
+      <Filter>Source Files\selfwidget</Filter>
+    </ClCompile>
+    <ClCompile Include="selfwidget\titlewidget.cpp">
+      <Filter>Source Files\selfwidget</Filter>
+    </ClCompile>
+    <ClCompile Include="buttongroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="login.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="myfilewg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rankinglist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sharelist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="transfer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="cloud_disk.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="common\common.h">
+      <Filter>Header Files\common</Filter>
+    </QtMoc>
+    <QtMoc Include="selfwidget\dataprogress.h">
+      <Filter>Header Files\selfwidget</Filter>
+    </QtMoc>
+    <QtMoc Include="selfwidget\filepropertyinfo.h">
+      <Filter>Header Files\selfwidget</Filter>
+    </QtMoc>
+    <QtMoc Include="selfwidget\mymenu.h">
+      <Filter>Header Files\selfwidget</Filter>
+    </QtMoc>
+    <QtMoc Include="selfwidget\titlewidget.h">
+      <Filter>Header Files\selfwidget</Filter>
+    </QtMoc>
+    <QtMoc Include="buttongroup.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="login.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="mainwindow.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="myfilewg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="rankinglist.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="sharelist.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="transfer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="selfwidget\titlewidget.ui">
+      <Filter>Form Files\selfwidegt</Filter>
+    </QtUic>
+    <QtUic Include="selfwidget\filepropertyinfo.ui">
+      <Filter>Form Files\selfwidegt</Filter>
+    </QtUic>
+    <QtUic Include="selfwidget\dataprogress.ui">
+      <Filter>Form Files\selfwidegt</Filter>
+    </QtUic>
+    <QtUic Include="buttongroup.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="login.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="mainwindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="myfilewg.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="rankinglist.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="sharelist.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="transfer.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="cloud_disk.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common\des.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\downloadlayout.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\downloadtask.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\logininfoinstance.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\uploadlayout.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\uploadtask.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
