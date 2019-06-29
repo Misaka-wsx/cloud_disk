@@ -8,7 +8,6 @@ message("You are running qmake on a generated .pro file. This may not work!")
 
 
 HEADERS += ./global.h \
-    ./cloud_disk.h \
     ./login.h \
     ./mainwindow.h \
     ./buttongroup.h \
@@ -26,9 +25,16 @@ HEADERS += ./global.h \
     ./myfilewg.h \
     ./rankinglist.h \
     ./sharelist.h \
-    ./transfer.h
+    ./transfer.h \
+    $$PWD/buttongroup.h \
+    $$PWD/global.h \
+    $$PWD/login.h \
+    $$PWD/mainwindow.h \
+    $$PWD/myfilewg.h \
+    $$PWD/rankinglist.h \
+    $$PWD/sharelist.h \
+    $$PWD/transfer.h
 SOURCES += ./main.cpp \
-    ./cloud_disk.cpp \
     ./login.cpp \
     ./buttongroup.cpp \
     ./common/common.cpp \
@@ -56,5 +62,6 @@ FORMS += ./login.ui \
     ./myfilewg.ui \
     ./rankinglist.ui \
     ./sharelist.ui \
-    ./transfer.ui
+    ./transfer.ui \
+    $$PWD/buttongroup.ui
 RESOURCES += cloud_disk.qrc

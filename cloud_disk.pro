@@ -17,3 +17,9 @@ OBJECTS_DIR += debug
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 include(cloud_disk.pri)
+
+FORMS +=
+
+HEADERS +=
+
+SOURCES +=
