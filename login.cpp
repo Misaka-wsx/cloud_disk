@@ -125,7 +125,32 @@ QByteArray Login::setLoginJson(QString user, QString pwd)
 //get server response of login stat return code 000 or 001 and login section
 QByteArray Login::setRegisterJson(QString userName, QString nickName, QString firstPwd, QString phone, QString email)
 {
+    QMap<QString, QVariant> reg;
+    reg.insert("userName", userName);
+    reg.insert("nickName", nickName);
+    reg.insert("firstPwd", firstPwd);
+    reg.insert("phone", phone);
+    reg.insert("email", email);
 
+    /*json data
+         {
+             userName:xxxx,
+             nickName:xxx,
+             firstPwd:xxx,
+             phone:xxx,
+             email:xxx
+         }
+     */
+    QJsonDocument jsonDocument = QJsonDocument::fromVariant(reg);
+    if ( jsonDocument.isNull() )
+    {
+        cout << " jsonDocument.isNull() ";
+        return "";
+    }
+
+    //cout << jsonDocument.toJson().data();
+
+    return jsonDocument.toJson();
 }
 
 QStringList Login::getLoginStatus(QByteArray json)
