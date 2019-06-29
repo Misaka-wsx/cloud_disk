@@ -33,11 +33,11 @@ protected:
     void paintEvent(QPaintEvent *);
 
 private slots:
-    void on_register_btn_clicked();
+    void onRegisterBtnClicked();
 
-    void on_login_btn_clicked();
+    void onLoginBtnClicked();
 
-    void on_set_ok_btn_clicked();
+    void onSetOkBtnClicked();
 
 private:
     // 读取配置信息，设置默认登录状态，默认设置信息
