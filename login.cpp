@@ -122,7 +122,7 @@ QByteArray Login::setLoginJson(QString user, QString pwd)
     }
     return doc.toJson();
 }
-
+//get server response of login stat return code 000 or 001 and login section
 QByteArray Login::setRegisterJson(QString userName, QString nickName, QString firstPwd, QString phone, QString email)
 {
 
@@ -130,7 +130,34 @@ QByteArray Login::setRegisterJson(QString userName, QString nickName, QString fi
 
 QStringList Login::getLoginStatus(QByteArray json)
 {
+    QJsonParseError error;
+    QStringList list;
+    //json to json doc;
+    QJsonDocument doc =QJsonDocument::fromJson(json,&error);
+    if(error.error==QJsonParseError::NoError)
+    {
+        if(doc.isNull()||doc.isEmpty())
+        {
+            cout<<"doc.isnull||doc.isempty";
+            return list;
+        }
+        if(doc.isObject())
+        {
+            QJsonObject obj=doc.object();
 
+            cout<<"server return"<<obj;
+            //code
+            list.append(obj.value("code").toString());
+            //login token
+            list.append(obj.value("token").toString());
+
+        }
+        else
+        {
+            cout<<"err="<<error.errorString();
+        }
+    }
+    return list;
 }
 
 void Login::paintEvent(QPaintEvent *)
