@@ -16,7 +16,7 @@ class MyFileWg : public QWidget
     Q_OBJECT
 
 public:
-    explicit MyFileWg(QWidget *parent = 0);
+    explicit MyFileWg(QWidget *parent = nullptr);
     ~MyFileWg();
 
     // 初始化listWidget文件列表
