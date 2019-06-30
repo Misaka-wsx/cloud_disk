@@ -299,16 +299,117 @@ void Login::onRegisterBtnClicked()
         }
         // release resorcs
         delete reply;
-        });
+    });
 }
 
 void Login::onLoginBtnClicked()
 {
+    //get usr login info
+    QString user=ui->log_usr->text();
+    QString pwd=ui->log_pwd->text();
+    QString address=ui->address_server->text();
+    QString port=ui->port_server->text();
+#if 0
+    // data check
+    QRegExp regexp(USER_REG);
+    if(!regexp.exactMatch(user))
+    {
+        QMessageBox::warning(this, "警告", "用户名格式不正确");
+        ui->log_usr->clear();
+        ui->log_usr->setFocus();
+        return;
+    }
+    regexp.setPattern(PASSWD_REG);
+    if(!regexp.exactMatch(pwd))
+    {
+        QMessageBox::warning(this, "警告", "密码格式不正确");
+        ui->log_pwd->clear();
+        ui->log_pwd->setFocus();
+        return;
+    }
+#endif
+    //write login info to cfg.json
+    m_cm.writeLoginInfo(user,pwd,ui->rember_pwd->isChecked());
+    //set login json use md5
+    QByteArray array=setLoginJson(user,m_cm.getStrMd5(pwd));
+    QNetworkRequest request;
+    //set login url
+    QString url=QString("http://%1:%2/login").arg(address).arg(port);
+    request.setUrl(QUrl(url));
+    //set request header
+    request.setHeader(QNetworkRequest::ContentTypeHeader,QVariant("application/json"));
+    request.setHeader(QNetworkRequest::ContentLengthHeader,QVariant(array.size()));
+    //send post to server
+    QNetworkReply* reply =m_manager->post(request,array);
+    cout<<"post url:"<<url<<"post data:"<<array;
+    //recive server http response
+    connect(reply,&QNetworkReply::finished,[=]()
+    {
+        if (reply->error() != QNetworkReply::NoError)
+        {
+            cout << reply->errorString();
+            //release
+            reply->deleteLater();
+            return;
+        }
 
+        // read server returned msg
+        QByteArray json = reply->readAll();
+        /*
+           login - server returned json：
+           success：{"code":"000"}
+           fail：{"code":"001"}
+        */
+        cout << "server return value: " << json;
+        QStringList tmpList = getLoginStatus(json); //common.h
+        if( tmpList.at(0) == "000" )
+        {
+            cout << "登陆成功";
+
+            // set login infomation
+            LoginInfoInstance *p = LoginInfoInstance::getInstance(); //get sigleten
+            p->setLoginInfo(user, address, port, tmpList.at(1));
+            cout << p->getUser().toUtf8().data() << ", " << p->getIp() << ", " << p->getPort() << tmpList.at(1);
+
+            // hide window
+            this->hide();
+            // mainwindow
+            m_mainWin->showMainWindow();
+        }
+        else
+        {
+            QMessageBox::warning(this, "登录失败", "用户名或密码不正确！！！");
+        }
+
+        reply->deleteLater(); //release
+    });
 }
 
 void Login::onSetOkBtnClicked()
 {
+    QString ip = ui->address_server->text();
+    QString port = ui->port_server->text();
+
+    // data check
+    // server IP
+    // \\d  \\. regexp
+    QRegExp regexp(IP_REG);
+    if(!regexp.exactMatch(ip))
+    {
+        QMessageBox::warning(this, "警告", "您输入的IP格式不正确, 请重新输入!");
+        return;
+    }
+    // port
+    regexp.setPattern(PORT_REG);
+    if(!regexp.exactMatch(port))
+    {
+        QMessageBox::warning(this, "警告", "您输入的端口格式不正确, 请重新输入!");
+        return;
+    }
+    // jmp to login page
+    ui->stackedWidget->setCurrentWidget(ui->login_page);
+    // write configure info
+    m_cm.writeWebInfo(ip, port);
 
 }
 
