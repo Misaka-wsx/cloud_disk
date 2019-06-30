@@ -311,3 +311,58 @@ void Login::onSetOkBtnClicked()
 {
 
 }
+
+void Login::readCfg()
+ {
+    QString user=m_cm.getCfgValue("login","user");
+    QString pwd=m_cm.getCfgValue("login","pwd");
+    QString remeber=m_cm.getCfgValue("login","remember");
+    int ret=0;
+    if(remeber=="yes")
+    {
+        //decode pwd
+        unsigned char encPwd[521]={0};
+        int encPwdLen=0;
+        QByteArray tmp=QByteArray::fromBase64(pwd.toLocal8Bit());
+        ret=DesDec((unsigned char* )tmp.data(),tmp.size(),encPwd,&encPwdLen);
+        if(ret!=0)
+        {
+            cout<<"desdec";
+            return ;
+        }
+#ifdef _WIN32
+        ui->log_pwd->setText(QString::fromLocal8Bit((const char*)encPwd,encPwdLen));
+#else
+        ui->log_pwd->setText((const char *)encpwd);
+#endif
+        ui->rember_pwd->setChecked(true);
+    }
+    else
+    {
+        ui->log_pwd->setText("");
+        ui->rember_pwd->setChecked(false);
+    }
+    //user decode
+    unsigned char encUsr[512]={0};
+    int encUsrLen=0;
+    //toLocal8Bit()
+    QByteArray tmp = QByteArray::fromBase64( user.toLocal8Bit());
+    ret = DesDec( (unsigned char *)tmp.data(), tmp.size(), encUsr, &encUsrLen);
+    if(ret != 0)
+    {
+        cout << "DesDec";
+        return;
+    }
+
+#ifdef _WIN32
+    //fromLocal8Bit()
+    ui->log_usr->setText( QString::fromLocal8Bit( (const char *)encUsr, encUsrLen ) );
+#else
+    ui->log_usr->setText( (const char *)encUsr );
+#endif
+
+    QString ip = m_cm.getCfgValue("web_server", "ip");
+    QString port = m_cm.getCfgValue("web_server", "port");
+    ui->address_server->setText(ip);
+    ui->port_server->setText(port);
+}
