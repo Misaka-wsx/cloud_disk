@@ -187,12 +187,119 @@ QStringList Login::getLoginStatus(QByteArray json)
 
 void Login::paintEvent(QPaintEvent *)
 {
-
+    QPainter painter(this);
+    QPixmap pixmap(":/images/login_bk.jpg");
+    painter.drawPixmap(0,0,width(),height(),pixmap);
 }
 
 void Login::onRegisterBtnClicked()
 {
+    //get usr data
+    QString userName = ui->reg_usr->text();
+    QString nickName = ui->reg_nickname->text();
+    QString firstPwd = ui->reg_pwd->text();
+    QString surePwd = ui->reg_surepwd->text();
+    QString phone = ui->reg_phone->text();
+    QString email = ui->reg_mail->text();
+#if 0
+    QRegExp regexp(USER_REG);
+    if(!regexp.exactMatch(userName))
+    {
+        QMessageBox::warning(this, "警告", "用户名格式不正确");
+        ui->reg_usr->clear();
+        ui->reg_usr->setFocus();
+        return;
+    }
+    if(!regexp.exactMatch(nickName))
+    {
+        QMessageBox::warning(this, "警告", "昵称格式不正确");
+        ui->reg_nickname->clear();
+        ui->reg_nickname->setFocus();
+        return;
+    }
+    regexp.setPattern(PASSWD_REG);
+    if(!regexp.exactMatch(firstPwd))
+    {
+        QMessageBox::warning(this, "警告", "密码格式不正确");
+        ui->reg_pwd->clear();
+        ui->reg_pwd->setFocus();
+        return;
+    }
+    if(surePwd != firstPwd)
+    {
+        QMessageBox::warning(this, "警告", "两次输入的密码不匹配, 请重新输入");
+        ui->reg_surepwd->clear();
+        ui->reg_surepwd->setFocus();
+        return;
+    }
+    regexp.setPattern(PHONE_REG);
+    if(!regexp.exactMatch(phone))
+    {
+        QMessageBox::warning(this, "警告", "手机号码格式不正确");
+        ui->reg_phone->clear();
+        ui->reg_phone->setFocus();
+        return;
+    }
+    regexp.setPattern(EMAIL_REG);
+    if(!regexp.exactMatch(email))
+    {
+        QMessageBox::warning(this, "警告", "邮箱码格式不正确");
+        ui->reg_mail->clear();
+        ui->reg_mail->setFocus();
+        return;
+    }
+#endif
+    //pack register infomation to json
+    QByteArray array=setRegisterJson(userName,nickName,m_cm.getStrMd5(firstPwd),phone,email);
 
+    QNetworkRequest request;
+    //url
+    QString url=QString("http://%1:%2/reg").arg(ui->address_server->text().arg(ui->port_server->text()));
+    request.setUrl(QUrl(url));
+    //header
+    request.setHeader(QNetworkRequest::ContentTypeHeader,QVariant("application/json"));
+    request.setHeader(QNetworkRequest::ContentLengthHeader,QVariant(array.size()));
+    //send data
+    QNetworkReply* reply=m_manager->post(request,array);
+    //check if dealed
+    connect(reply,&QNetworkReply::readyRead,[=](){
+        //server return code
+        QByteArray json=reply->readAll();
+        //success code 002
+        //user exist code 003
+        //fail code 004
+        if("002"==m_cm.getCode(json))
+        {
+            //register success
+            QMessageBox::information(this, "注册成功", "注册成功，请登录");
+
+            //clear
+            ui->reg_usr->clear();
+            ui->reg_nickname->clear();
+            ui->reg_pwd->clear();
+            ui->reg_surepwd->clear();
+            ui->reg_phone->clear();
+            ui->reg_mail->clear();
+
+            //set login page info
+            ui->log_usr->setText(userName);
+            ui->log_pwd->setText(firstPwd);
+            ui->rember_pwd->setChecked(true);
+
+            //switch to login page
+            ui->stackedWidget->setCurrentWidget(ui->login_page);
+        }
+        else if("003" == m_cm.getCode(json))
+        {
+            QMessageBox::warning(this, "注册失败", QString("[%1]该用户已经存在!!!").arg(userName));
+        }
+        else if("004" == m_cm.getCode(json))
+        {
+            QMessageBox::warning(this, "注册失败", "注册失败！！！");
+        }
+        // release resorcs
+        delete reply;
+        });
 }
 
 void Login::onLoginBtnClicked()
