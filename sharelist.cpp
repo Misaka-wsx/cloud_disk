@@ -64,7 +64,7 @@ void ShareList::initListWidget()
     {
         QListWidgetItem *item = ui->listWidget->itemAt( pos );
 
-        if( item == NULL ) // 没有点图标
+        if( item == nullptr ) // 没有点图标
         {
             // QPoint QMouseEvent::pos()   这个只是返回相对这个widget(重载了QMouseEvent的widget)的位置。
             // QPoint QMouseEvent::globalPos()  窗口坐标，这个是返回鼠标的全局坐标
@@ -192,7 +192,7 @@ void ShareList::refreshFiles()
 
     // 发送get请求
     QNetworkReply * reply = m_manager->get( QNetworkRequest( QUrl(url)) );
-    if(reply == NULL)
+    if(reply == nullptr)
     {
         cout << "reply == NULL";
         return;
@@ -297,7 +297,7 @@ void ShareList::getUserFilesList()
 
     // 发送post请求
     QNetworkReply * reply = m_manager->post( request, data );
-    if(reply == NULL)
+    if(reply == nullptr)
     {
         cout << "reply == NULL";
         return;
@@ -435,7 +435,7 @@ void ShareList::getFileJsonInfo(QByteArray data)
 void ShareList::addDownloadFiles()
 {
     QListWidgetItem *item = ui->listWidget->currentItem();
-    if(item == NULL)
+    if(item == nullptr)
     {
         cout << "item == NULL";
         return;
@@ -446,7 +446,7 @@ void ShareList::addDownloadFiles()
 
     // 获取下载列表实例
     DownloadTask *p = DownloadTask::getInstance();
-    if(p == NULL)
+    if(p == nullptr)
     {
         cout << "DownloadTask::getInstance() == NULL";
         return;
@@ -496,7 +496,7 @@ void ShareList::addDownloadFiles()
 void ShareList::downloadFilesAction()
 {
     DownloadTask *p = DownloadTask::getInstance();
-    if(p == NULL)
+    if(p == nullptr)
     {
         cout << "DownloadTask::getInstance() == NULL";
         return;
@@ -527,7 +527,7 @@ void ShareList::downloadFilesAction()
 
     // 发送get请求
     QNetworkReply * reply = m_manager->get( QNetworkRequest(url) );
-    if(reply == NULL)
+    if(reply == nullptr)
     {
         p->dealDownloadTask(); // 删除任务
         cout << "get err";
@@ -552,7 +552,7 @@ void ShareList::downloadFilesAction()
     connect(reply, &QNetworkReply::readyRead, [=]()
     {
         // 如果文件存在，则写入文件
-        if (file != NULL)
+        if (file != nullptr)
         {
             file->write(reply->readAll());
         }
@@ -617,7 +617,7 @@ void ShareList::dealFilePv(QString md5, QString filename)
 
     // 发送post请求
     QNetworkReply * reply = m_manager->post( request, data );
-    if(reply == NULL)
+    if(reply == nullptr)
     {
         cout << "reply == NULL";
         return;
@@ -670,7 +670,7 @@ void ShareList::dealSelectdFile(ShareList::CMD cmd)
 {
     // 获取当前选中的item
     QListWidgetItem *item = ui->listWidget->currentItem();
-    if(item == NULL)
+    if(item == nullptr)
     {
         return;
     }
@@ -706,7 +706,7 @@ void ShareList::getFileProperty(FileInfo *info)
     dlg.exec();           // 模态显示
 }
 
-// 取消分析的文件
+// 取消分享的文件
 void ShareList::cancelShareFile(FileInfo *info)
 {
     // 获取登陆信息实例
@@ -743,7 +743,7 @@ void ShareList::cancelShareFile(FileInfo *info)
 
     // 发送post请求
     QNetworkReply * reply = m_manager->post( request, data );
-    if(reply == NULL)
+    if(reply == nullptr)
     {
         cout << "reply == NULL";
         return;
@@ -832,7 +832,7 @@ void ShareList::saveFileToMyList(FileInfo *info)
 
     // 发送post请求
     QNetworkReply * reply = m_manager->post( request, data );
-    if(reply == NULL)
+    if(reply == nullptr)
     {
         cout << "reply == NULL";
         return;
