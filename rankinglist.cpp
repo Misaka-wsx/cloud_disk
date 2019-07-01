@@ -99,7 +99,7 @@ void RankingList::refreshFiles()
 
     // 发送get请求
     QNetworkReply * reply = m_manager->get( QNetworkRequest( QUrl(url)) );
-    if(reply == NULL)
+    if(reply == nullptr)
     {
         cout << "reply == NULL";
         return;
@@ -213,7 +213,7 @@ void RankingList::getUserFilesList()
 
     // 发送post请求
     QNetworkReply * reply = m_manager->post( request, data );
-    if(reply == NULL)
+    if(reply == nullptr)
     {
         cout << "reply == NULL";
         return;
